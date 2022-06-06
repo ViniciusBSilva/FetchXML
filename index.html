@@ -11,9 +11,9 @@
 <body>
     <script>
 
-        fetch("https://codetogo.io/api/users.xml")
+        fetch("http://codetogo.io/api/users.xml")
             .then(response => {
-                console.log(response, response);
+                console.log("response", response);
                 response.text();
 
             })
