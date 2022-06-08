@@ -10,7 +10,6 @@
 
 <body>
     <script>
-
         const requestHeaders = new Headers();
         requestHeaders.append("Accept", "*/*");
         requestHeaders.append("Accept-Encoding", "gzip, deflate, br");
@@ -47,7 +46,6 @@
             })
             .then(result => console.log("Result", result))
             .catch(error => console.error("FETCH Error:", error));
-
     </script>
 </body>
 
