@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch XML</title>
+</head>
+
+<body>
+    <script>
+
+        const requestHeaders = new Headers();
+        requestHeaders.append("Accept", "*/*");
+        requestHeaders.append("Accept-Encoding", "gzip, deflate, br");
+        requestHeaders.append("Content-Type", "text/xml; charset=utf-8");
+        // requestHeaders.append("Access-Control-Allow-Origin", "*");
+
+
+        const requestBodyRaw =
+            `
+            <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.dataaccess.com/webservicesserver/">
+                <soapenv:Header/>
+                <soapenv:Body>
+                    <web:NumberToWords>
+                        <web:ubiNum>500</web:ubiNum>
+                    </web:NumberToWords>
+                </soapenv:Body>
+            </soapenv:Envelope>
+            `;
+
+        // requestHeaders.append("Content-Length", (new TextEncoder().encode(requestBodyRaw)).length);
+
+        const requestOptions = {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: requestHeaders,
+            body: requestBodyRaw,
+            redirect: 'follow'
+        };
+
+        fetch("https://www.dataaccess.com/webservicesserver/NumberConversion.wso", requestOptions)
+            .then(response => {
+                console.log("response", response);
+                response.text();
+            })
+            .then(result => console.log("Result", result))
+            .catch(error => console.error("FETCH Error:", error));
+
+    </script>
+</body>
+
+</html>
