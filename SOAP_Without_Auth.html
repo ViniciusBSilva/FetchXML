@@ -11,29 +11,14 @@
 <body>
     <script>
         const requestHeaders = new Headers();
-        requestHeaders.append("Accept", "*/*");
-        requestHeaders.append("Accept-Encoding", "gzip, deflate, br");
         requestHeaders.append("Content-Type", "text/xml; charset=utf-8");
-        // requestHeaders.append("Access-Control-Allow-Origin", "*");
 
 
         const requestBodyRaw =
-            `
-            <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.dataaccess.com/webservicesserver/">
-                <soapenv:Header/>
-                <soapenv:Body>
-                    <web:NumberToWords>
-                        <web:ubiNum>500</web:ubiNum>
-                    </web:NumberToWords>
-                </soapenv:Body>
-            </soapenv:Envelope>
-            `;
-
-        // requestHeaders.append("Content-Length", (new TextEncoder().encode(requestBodyRaw)).length);
+            "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\n      <ubiNum>500</ubiNum>\n    </NumberToWords>\n  </soap:Body>\n</soap:Envelope>";
 
         const requestOptions = {
             method: 'POST',
-            mode: 'no-cors',
             headers: requestHeaders,
             body: requestBodyRaw,
             redirect: 'follow'
